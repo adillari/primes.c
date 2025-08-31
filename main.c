@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print_int_array(int* array, int size) {
+void print_int_array(int* array, int size)
+{
     for (int iterator = 0; iterator < size; iterator++)
     {
         printf("%d\n", array[iterator]);
@@ -43,7 +44,8 @@ int main(int argc, char* argv[])
 
         // and convert any multiples of integers to 0
         int multiple = integer;
-        while (true) {
+        while (true)
+        {
             multiple += integer;
 
             int* integer_to_check_ptr = &integers[multiple-2]; // -2 because 2 is at index 0, 3 is at 1, etc
@@ -75,13 +77,16 @@ int main(int argc, char* argv[])
     // copy primes over to our new smaller array
     int integers_iterator = 0;
     int primes_iterator = 0;
-    while (integers_iterator < LIMIT) {
+    while (integers_iterator < LIMIT)
+    {
         int prime = integers[integers_iterator];
+
         if (prime != 0)
         {
             primes[primes_iterator] = prime;
             primes_iterator++;
         }
+
         integers_iterator++;
     }
 
