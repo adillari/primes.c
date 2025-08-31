@@ -46,11 +46,13 @@ int main(int argc, char* argv[])
         while (true) {
             multiple += integer;
 
+            int* integer_to_check_ptr = &integers[multiple-2]; // -2 because 2 is at index 0, 3 is at 1, etc
+
             if (multiple > LIMIT+1) break;
-            if (integers[multiple-2] == 0) continue;
+            if (*integer_to_check_ptr == 0) continue;
 
             printf("setting %d to 0\n", integers[multiple-2]);
-            integers[multiple-2] = 0; // -2 because 2 is at index 0, 3 is at 1, etc
+            *integer_to_check_ptr = 0;
         }
     }
 
