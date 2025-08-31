@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print_int_array(int* array, int size)
-{
-    for (int iterator = 0; iterator < size; iterator++)
-    {
-        printf("%d\n", array[iterator]);
-    }
-}
+#define FILENAME "primes.txt"
 
 int main(int argc, char* argv[])
 {
@@ -20,10 +14,9 @@ int main(int argc, char* argv[])
     const int LIMIT = atoi(argv[1])-1;
 
     int *integers = malloc(sizeof(int) * LIMIT);
-
     if (integers == NULL)
     {
-        printf("malloc failed\n");
+        perror("malloc failed\n");
         return 1;
     }
 
@@ -48,7 +41,7 @@ int main(int argc, char* argv[])
         {
             multiple += integer;
 
-            int* integer_to_check_ptr = &integers[multiple-2]; // -2 because 2 is at index 0, 3 is at 1, etc
+            int* integer_to_check_ptr = &integers[multiple-2]; // -2 because 2 is at index 0, 3 at 1, etc
 
             if (multiple > LIMIT+1) break;
             if (*integer_to_check_ptr == 0) continue;
@@ -92,12 +85,23 @@ int main(int argc, char* argv[])
 
     free(integers);
 
-    printf("printing primes...\n");
-    printf("...\n");
-    printf("...\n");
-    printf("...\n");
+    printf("\nSaving primes to %s...\n", FILENAME);
 
-    print_int_array(primes, num_primes);
+    FILE *fp = fopen(FILENAME, "w");
+    if (fp == NULL)
+    {
+        perror("Error opening file");
+        return 1;
+    }
+    else
+    {
+        for (int iterator = 0; iterator < num_primes; iterator++)
+        {
+            fprintf(fp, "%d\n", primes[iterator]);
+        }
+    }
+
+    printf("\nSaved primes to %s...\n", FILENAME);
 
     free(primes);
 
