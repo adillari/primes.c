@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    const int LIMIT = atoi(argv[1]);
+    const int LIMIT = atoi(argv[1])-1;
 
     int *integers = malloc(sizeof(int) * LIMIT);
 
